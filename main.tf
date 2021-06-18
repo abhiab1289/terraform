@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 provider "aws"  {
-=======
-provider "aws" {
->>>>>>> 069cf6aec6b141115521f71592e179374e314ced
 profile = "default"
 region = "us-east-1"
 }
@@ -106,11 +102,7 @@ cidr_blocks = ["0.0.0.0/0"]
 }
 tags = { Name = "terravpcSG" }
 }
-<<<<<<< HEAD
 resource "aws_security_group" "sgforLB" {
-=======
-resource "aws_security_group" "sgforALB" {
->>>>>>> 069cf6aec6b141115521f71592e179374e314ced
 vpc_id = aws_vpc.terravpc.id
 egress {
 from_port = 0
@@ -136,11 +128,7 @@ to_port = 443
 protocol = "tcp"
 cidr_blocks = ["0.0.0.0/0"]
 }
-<<<<<<< HEAD
 tags = { Name = "LBSG" }
-=======
-tags = { Name = "ALBSG" }
->>>>>>> 069cf6aec6b141115521f71592e179374e314ced
 }
 resource "tls_private_key" "terrakey" {
 algorithm = "RSA"
@@ -165,7 +153,6 @@ vpc_security_group_ids = ["${aws_security_group.sgforterravpc.id}"]
 user_data = "${file("webserver.sh")}"
 tags = { Name = "webserver" }
 }
-<<<<<<< HEAD
 resource "aws_lb" "LB" {
 name = "lb"
 internal = false
@@ -175,17 +162,6 @@ subnets 	=  ["${aws_subnet.tvpc-sub1.id}","${aws_subnet.tvpc-sub2.id}"]
 ip_address_type = "ipv4" 
 enable_http2 = "true"
 enable_deletion_protection = "false"
-=======
-resource "aws_lb" "ALB" {
-name = "alb"
-internal = false
-load_balancer_type = "application"
-security_groups =  ["${aws_security_group.sgforALB.id}"]
-subnets 	=  ["${aws_subnet.tvpc-sub1.id}","${aws_subnet.tvpc-sub2.id}"]
-ip_address_type = "ipv4" 
-enable_http2 = "true"
-enable_deletion_protection = true
->>>>>>> 069cf6aec6b141115521f71592e179374e314ced
   tags = {
     Environment = "production"
   }
@@ -203,11 +179,7 @@ port     = 80
  
 }
 resource "aws_lb_listener" "front_end" {
-<<<<<<< HEAD
  load_balancer_arn = aws_lb.LB.arn
-=======
- load_balancer_arn = aws_lb.ALB.arn
->>>>>>> 069cf6aec6b141115521f71592e179374e314ced
   port              = "80"
   protocol          = "HTTP"
 default_action {
@@ -223,7 +195,6 @@ resource "aws_launch_template" "mywebserver" {
   name_prefix   = "mywebserver"
   image_id      = aws_ami_from_instance.Myweb_server.id
   instance_type = "t2.micro"
-<<<<<<< HEAD
 key_name = "terrakey"
 vpc_security_group_ids = ["${aws_security_group.sgforterravpc.id}"]
 }
@@ -244,17 +215,4 @@ target_group_arns = [aws_lb_target_group.Tgforalb.arn]
 resource "aws_autoscaling_attachment" "asg_attachment_lb" {
   autoscaling_group_name = aws_autoscaling_group.asg.id
   alb_target_group_arn = aws_lb_target_group.Tgforalb.arn
-=======
-}
-resource "aws_autoscaling_group" "asg" {
-  availability_zones = ["us-east-1a"]
-  desired_capacity   = 1
-  max_size           = 1
-  min_size           = 1
-
-  launch_template {
-    id      = aws_launch_template.mywebserver.id
-    version = "$Latest"
-  }
->>>>>>> 069cf6aec6b141115521f71592e179374e314ced
 }
