@@ -201,7 +201,7 @@ vpc_security_group_ids = ["${aws_security_group.sgforterravpc.id}"]
 
 resource "aws_autoscaling_group" "asg" {
   desired_capacity   = 1
-  max_size           = 1
+  max_size           = 2
   min_size           = 1
 health_check_grace_period = 60
   health_check_type         = "ELB"
