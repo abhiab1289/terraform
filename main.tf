@@ -212,7 +212,7 @@ resource "aws_route53_record" "www" {
   type    = "A"
   alias {
     name                   = aws_lb.LB.dns_name
-    zone_id                = aws_lb.main.zone_id
+    zone_id                = aws_lb.LB.zone_id
     evaluate_target_health = true
   }
 }
