@@ -183,7 +183,7 @@ resource "aws_lb_listener" "https" {
    port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2019-08"
-  certificate_arn   = "	arn:aws:acm:us-east-1:502434380454:certificate/15001810-b94e-4045-b0e9-813d101d0af8"
+  certificate_arn   = "arn:aws:acm:us-east-1:502434380454:certificate/15001810-b94e-4045-b0e9-813d101d0af8"
 default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.Tgforalb.arn
@@ -201,6 +201,19 @@ resource "aws_lb_listener" "rediecthttps" {
       protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
+  }
+}
+resource "aws_route53_zone" "main" {
+  name = "www.abhinavblog.ga"
+}
+resource "aws_route53_record" "www" {
+  zone_id = aws_route53_zone.main.zone_id
+  name    = "www.abhinavblog.ga"
+  type    = "A"
+  alias {
+    name                   = aws_lb.main.dns_name
+    zone_id                = aws_lb.main.zone_id
+    evaluate_target_health = true
   }
 }
 resource "aws_ami_from_instance" "Myweb_server" {
