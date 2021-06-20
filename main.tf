@@ -194,6 +194,7 @@ resource "aws_lb_listener" "rediecthttps" {
   port              = "80"
   protocol          = "HTTP"
   default_action {
+    target_group_arn = aws_lb_target_group.Tgforalb.arn
     type = "redirect"
 
     redirect {
