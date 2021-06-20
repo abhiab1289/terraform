@@ -191,7 +191,7 @@ resource "aws_lb_listener" "front_end" {
       status_code = "HTTP_301"
     }
   }
- resource "aws_lb_listener" "back_end" {
+ resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.LB.arn
    port              = "443"
   protocol          = "HTTPS"
