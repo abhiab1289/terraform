@@ -179,9 +179,24 @@ port     = 80
  
 }
 resource "aws_lb_listener" "front_end" {
- load_balancer_arn = aws_lb.LB.arn
+  load_balancer_arn = aws_lb.LB.arn
   port              = "80"
   protocol          = "HTTP"
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+ resource "aws_lb_listener" "back_end" {
+  load_balancer_arn = aws_lb.LB.arn
+   port              = "443"
+  protocol          = "HTTPS"
+  ssl_polocy        = "ELBSecurityPolicy-2019-08"
+  certificate_arn   = "	arn:aws:acm:us-east-1:502434380454:certificate/15001810-b94e-4045-b0e9-813d101d0af8"
 default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.Tgforalb.arn
