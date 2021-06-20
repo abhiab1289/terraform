@@ -203,11 +203,11 @@ resource "aws_lb_listener" "rediecthttps" {
     }
   }
 }
-resource "aws_route53_zone" "main" {
+resource "aws_route53_zone" "primary" {
   name = "www.abhinavblog.ga"
 }
 resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.main.zone_id
+  zone_id = aws_route53_zone.primary.zone_id
   name    = "www.abhinavblog.ga"
   type    = "A"
   alias {
