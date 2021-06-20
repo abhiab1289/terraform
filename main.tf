@@ -196,13 +196,13 @@ resource "aws_lb_listener" "rediecthttps" {
   default_action {
     target_group_arn = aws_lb_target_group.Tgforalb.arn
     type = "redirect"
-  }
-    redirect {
+      redirect {
       port        = "443"
       protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
   }
+}
 resource "aws_ami_from_instance" "Myweb_server" {
   name               = "Myweb_server"
   source_instance_id = "${aws_instance.web_server.id}"
