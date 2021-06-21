@@ -31,7 +31,7 @@ vpc_id = aws_vpc.terravpc.id
 route {
 cidr_block = "0.0.0.0/0"
 gateway_id = aws_internet_gateway.tigw.id
-}
+} 
 tags ={ Name = "rt_terravpc" }
 }
 resource "aws_route_table_association" "rt_sub1" {
