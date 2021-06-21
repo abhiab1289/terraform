@@ -255,9 +255,6 @@ resource "aws_autoscaling_attachment" "asg_attachment_lb" {
 <<<<<<< HEAD
 <<<<<<< HEAD
 }
-output "webserver_instance_id"
-value = aws_instance.web_server.instance_id
-}
 output "webserver_subnet_id"
 value = aws_instance.web_server.subnet_id
 }
