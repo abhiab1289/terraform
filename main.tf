@@ -139,15 +139,7 @@ public_key = "${tls_private_key.terrakey.public_key_openssh}"
 depends_on = [tls_private_key.terrakey]
 }
 resource "local_file" "key" {
-<<<<<<< HEAD
-<<<<<<< HEAD
-content =OB "${tls_private_key.terrakey.private_key_pem}"
-=======
 content = "${tls_private_key.terrakey.private_key_pem}"
->>>>>>> 862ad950a78d66f13d068652d3bb12003e9b0ae0
-=======
-content = "${tls_private_key.terrakey.private_key_pem}"
->>>>>>> 862ad950a78d66f13d068652d3bb12003e9b0ae0
 filename = "terrakey.pem"
 file_permission = "0400"
 depends_on = [tls_private_key.terrakey]
@@ -252,19 +244,4 @@ target_group_arns = [aws_lb_target_group.Tgforalb.arn]
 resource "aws_autoscaling_attachment" "asg_attachment_lb" {
   autoscaling_group_name = aws_autoscaling_group.asg.id
   alb_target_group_arn = aws_lb_target_group.Tgforalb.arn
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-output "webserver_subnet_id"
-value = aws_instance.web_server.subnet_id
-}
-output "webserver_public-ip"
-value = aws_instance.web_server.public_ip
-}
-
-=======
 } 
->>>>>>> 862ad950a78d66f13d068652d3bb12003e9b0ae0
-=======
-} 
->>>>>>> 862ad950a78d66f13d068652d3bb12003e9b0ae0
