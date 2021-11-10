@@ -150,7 +150,7 @@ instance_type = "t2.micro"
 subnet_id = aws_subnet.tvpc-sub1.id
 key_name = "terrakey"
 vpc_security_group_ids = ["${aws_security_group.sgforterravpc.id}"]
-+    = "${file("webserver.sh")}"
+user_data = "${file("webserver.sh")}"
 tags = { Name = "webserver" }
 }
 resource "aws_lb" "LB" {
